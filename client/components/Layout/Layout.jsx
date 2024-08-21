@@ -12,11 +12,25 @@ const Layout = ({ children }) => {
             <View>
                 {children}
             </View>
-            <Footer />
+            <View style={styles.footer}>
+                <Footer />
+            </View>
         </>
     )
 }
 
 export default Layout
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    footer:{
+        position:"absolute",
+        bottom:0,
+        borderTopWidth:1,
+        borderTopColor:"lightgray",
+        width:"100%",
+        padding:12,
+       backgroundColor:"gray",
+      
+        
+    }
+})

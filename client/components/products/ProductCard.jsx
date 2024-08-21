@@ -6,8 +6,14 @@ const ProductCard = ({ pro }) => {
 
   const navigation = useNavigation()
   const handledetail = (id) => {
-    navigation.navigate("productdetail", {_id: id})
+    navigation.navigate("productdetail", { _id: id })
+    console.log(id);
+  }
 
+  const handleCart = (id) => {
+    alert("Product added to cart")
+    console.log(id);
+    
   }
   return (
     <View>
@@ -15,12 +21,12 @@ const ProductCard = ({ pro }) => {
         <Image source={{ uri: pro?.imageUrl }} style={styles.cardImage} />
         <Text style={styles.cardTitle}>{pro?.name}</Text>
         <Text style={styles.cardDes}>{pro?.description.substring(0, 40)} ...more</Text>
-        <View  style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btnText}  onPress={() => handledetail(pro._id)}>
+        <View style={styles.btnContainer}>
+          <TouchableOpacity style={styles.btnText} onPress={() => handledetail(pro._id)}>
             <Text style={styles.btn1}>Details</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCart}>
-            <Text  style={styles.btn1}>ADD TO CART</Text>
+          <TouchableOpacity style={styles.btnCart}  onPress={() => handleCart(pro._id)}>
+            <Text style={styles.btn1}>ADD TO CART</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -56,37 +62,37 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: "left"
   },
-  btnContainer:{
-    flexDirection:"row",
-    marginTop:5,
-    justifyContent:"space-evenly",
-    alignItems:"center"
+  btnContainer: {
+    flexDirection: "row",
+    marginTop: 5,
+    justifyContent: "space-evenly",
+    alignItems: "center"
 
   },
-  btnCart:{
-    elevation:2,
-    backgroundColor:"#597445",
-    borderRadius:3,
-    width:90,
-    height:30,
-    justifyContent:"center",
-    marginHorizontal:10
-    
+  btnCart: {
+    elevation: 2,
+    backgroundColor: "#597445",
+    borderRadius: 3,
+    width: 90,
+    height: 30,
+    justifyContent: "center",
+    marginHorizontal: 10
+
   },
-  btnText:{
-    elevation:2,
-    backgroundColor:"#729762",
-    borderRadius:3,
-    width:90,
-    height:30,
-    justifyContent:"center",
-    marginHorizontal:10
-    
+  btnText: {
+    elevation: 2,
+    backgroundColor: "#729762",
+    borderRadius: 3,
+    width: 90,
+    height: 30,
+    justifyContent: "center",
+    marginHorizontal: 10
+
   },
-  btn1:{
-    textAlign:"center",
-    fontSize:12,
-    color:"white",
-    fontWeight:"bold"
+  btn1: {
+    textAlign: "center",
+    fontSize: 12,
+    color: "white",
+    fontWeight: "bold"
   }
 })
