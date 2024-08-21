@@ -22,15 +22,15 @@ const Layout = ({ children }) => {
 export default Layout
 
 const styles = StyleSheet.create({
-    footer:{
-        position:"absolute",
-        bottom:0,
-        borderTopWidth:1,
-        borderTopColor:"lightgray",
-        width:"100%",
-        padding:12,
-       backgroundColor:"gray",
-      
-        
+    footer: {
+        position: "absolute",
+        bottom: 0,
+        borderTopWidth: 1,
+        borderTopColor: "lightgray",
+        width: "100%",
+        padding: 12,
+        backgroundColor: "lightgray",
+
+
     }
 })
