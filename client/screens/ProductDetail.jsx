@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { productData } from '../data/productData'
 import Layout from '../components/Layout/Layout'
 
+
 const ProductDetail = ({ route }) => {
 
   const { params } = route
@@ -34,13 +35,20 @@ const ProductDetail = ({ route }) => {
       <View style={styles.container} >
 
         <Text style={styles.name}>{pDetails?.name}</Text>
-        <Text style={styles.name}>Price: ₹ {pDetails?.price}</Text>
+        <Text style={styles.name}>{pDetails?.quantity > 0 ? <Text>Price: ₹ {pDetails.price}</Text>  : <Text style={{textDecorationLine:"line-through", color:"red"}}>Out of Stock</Text> }</Text>
         <Text><Text style={{ fontWeight: "bold" }}>Details:</Text> {pDetails?.description}</Text>
 
         <View style={styles.btnContainer}>
 
-          <TouchableOpacity style={styles.cart}  onPress={() => alert(`${qty} items are added to cart` )}>
-            <Text style={styles.cartText}>ADD TO CART</Text>
+          <TouchableOpacity style={styles.cart}
+            onPress={() => alert(`${qty} items are added to cart` )}
+            disabled={pDetails?.quantity <= 0}
+            >
+            <Text style={styles.cartText}>
+              {
+                pDetails?.quantity > 0 ? "ADD TO CART" : <Text >OUT OF STOCK</Text> 
+              }
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.btnContainer}>
