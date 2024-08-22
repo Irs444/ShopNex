@@ -17,7 +17,7 @@ const Footer = () => {
         <Text style={[styles.input, route.name === "home" && styles.active]}>Home</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.menu}  onPress={() => alert("Notification Page")}>
+      <TouchableOpacity style={styles.menu}  onPress={() => navigation.navigate("notification")}>
         <AntDesign name="bells" size={27} color="#524C42"  style={route.name === "notification" && styles.active} />
         <Text style={[styles.input , route.name === "notification" && styles.active]}>Notification</Text>
       </TouchableOpacity>
@@ -27,12 +27,12 @@ const Footer = () => {
         <Text style={[styles.input,  route.name === "cart" && styles.active]}>Cart</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.menu}  onPress={() => alert("Account Page")}>
+      <TouchableOpacity style={styles.menu}  onPress={() => navigation.navigate("account")}>
         <AntDesign name="user" size={27} color="#524C42"  style={route.name === "account" && styles.active} />
         <Text style={[styles.input,  route.name === "account" && styles.active ]}>Account</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.menu}  onPress={() => alert("Logout Page")}>
+      <TouchableOpacity style={styles.menu}  onPress={() => {alert("Logout successfully") , navigation.navigate("login")}}>
         <AntDesign name="logout" size={27} color="#524C42" />
         <Text style={styles.input}>Logout</Text>
       </TouchableOpacity>
