@@ -12,6 +12,7 @@ import Register from './screens/auth/Register';
 import Account from './screens/Account/Account';
 import Notification from './screens/Account/Notification';
 import Profile from './screens/Account/Profile';
+import MyOrders from './screens/Account/MyOrders';
 
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ export default function App() {
       <Stack.Screen name='account' component={Account}/>
       <Stack.Screen name='notification' component={Notification}/>
       <Stack.Screen name='profile' component={Profile}/>
+      <Stack.Screen name='order' component={MyOrders}/>
       <Stack.Screen name='checkout' component={Checkout}/>
       <Stack.Screen name='payment' component={Payment}/>
     </Stack.Navigator>

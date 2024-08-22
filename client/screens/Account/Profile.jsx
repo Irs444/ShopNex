@@ -1,4 +1,4 @@
-import { Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Button, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import Layout from '../../components/Layout/Layout'
 import { userData } from '../../data/userData'
@@ -16,7 +16,7 @@ const Profile = ({navigation}) => {
         if (!email || !password || !name ) {
             alert("Please fill all the fields")
         } else {
-            alert("Profile Update Successfully")
+            Alert.alert("Profile Update Successfully")
             navigation.navigate("account")
         }
     }
