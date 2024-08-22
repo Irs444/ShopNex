@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
 import ProductDetail from './screens/ProductDetail';
+import Cart from './screens/Cart';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ export default function App() {
         headerShown: false
       }}/>
       <Stack.Screen name='productdetail' component={ProductDetail}/>
+      <Stack.Screen name='cart' component={Cart}/>
     </Stack.Navigator>
     </NavigationContainer>
   );
