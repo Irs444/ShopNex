@@ -20,22 +20,27 @@ const Account = ({ navigation }) => {
                             </View>
                             <View style={styles.btnContainer}>
                                 <Text style={styles.heading}>Account Setting</Text>
+
                                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("profile", { id: userData._id })}>
                                     <AntDesign name='edit' size={20} style={{ margin: 10 }} />
                                     <Text style={styles.btnText}>Edit Profile</Text>
                                 </TouchableOpacity>
+
                                 <TouchableOpacity style={styles.btn}  onPress={() => navigation.navigate("order", {id: userData._id})}>
                                     <AntDesign name='bars' size={20} style={{ margin: 10 }} />
                                     <Text style={styles.btnText}>My Orders</Text>
                                 </TouchableOpacity>
+
                                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("notification")}>
                                     <AntDesign name='bells' size={20} style={{ margin: 10 }} />
                                     <Text style={styles.btnText}>Notification</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.btn}>
+
+                                <TouchableOpacity style={styles.btn}  onPress={() => navigation.navigate("adminpanel")}>
                                     <MaterialIcons name='admin-panel-settings' size={20} style={{ margin: 10 }} />
                                     <Text style={styles.btnText}>Admin Panel</Text>
                                 </TouchableOpacity>
+
                             </View>
                         </View>
                     )
