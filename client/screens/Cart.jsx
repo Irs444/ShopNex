@@ -34,7 +34,7 @@ const Cart = ({navigation}) => {
                             <View style={styles.grandTotal}>
                                 <PriceTable title={"GrandTotal"} price={` ₹ 77880`} />
                             </View>
-                            <TouchableOpacity style={styles.checkout}  onPress={() => alert("checkout page")}>
+                            <TouchableOpacity style={styles.checkout}  onPress={() => navigation.navigate("checkout")}>
                                 <Text style={styles.text}>CHECKOUT</Text>
                             </TouchableOpacity>
                         </View>
