@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 const connectDB = require("./config/db.js")
 
 const TestRoute = require("./routes/testRoute.js")
+const UserRoute = require("./routes/userRoute.js")
 
 //dotenv config
 dotenv.config();
@@ -23,10 +24,9 @@ app.use(cors())
 
 
 app.use("/" , TestRoute)
+app.use("/user" , UserRoute)
 
-app.use("/" , (req, res) => {
-    res.status(200).send("Welcome to the server")
-})
+
 
 
 app.listen(port , () => {
