@@ -71,10 +71,15 @@ const loginController = async(req , res) => {
                 message:"invalid credentials",
             })
         }
-        res.status(200).send({
+        //Token 
+        const token = user.generateToken();
+        res.status(200).cookie("token", token , {
+            expires: new Date(Date.now() + 15*24*60*60*1000)    // for token store in cookies
+        }).send({
             success:true,
             message:"Login successfully",
-            user
+            user,
+            token
         })
 
     }catch(error){
