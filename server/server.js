@@ -2,11 +2,15 @@ const express = require("express")
 const morgan = require("morgan")
 const cors = require("cors")
 const dotenv = require("dotenv")
+const connectDB = require("./config/db.js")
 
 const TestRoute = require("./routes/testRoute.js")
 
 //dotenv config
 dotenv.config();
+
+//database connection
+connectDB();
 
 
 const app = express()
