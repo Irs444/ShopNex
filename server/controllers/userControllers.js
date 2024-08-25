@@ -1,4 +1,6 @@
-const userModel = require("../models/userModel")
+const userModel = require("../models/userModel");
+const getDataUri = require("../utils/features");
+const cloudinary = require("cloudinary")
 
 const userController = async (req, res) => {
     try {
@@ -211,6 +213,42 @@ const updatePasswordController = async (req, res) => {
 
 }
 
+// update profile picture
+
+const updateProfilePic = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.user._id)  // to find user
+        // get file from client
+        const file = getDataUri(req.file)
+        // delete previous image
+        await cloudinary.v2.uploader.destroy(user.profile.public_id)
+        // update image
+        const cb = await cloudinary.v2.uploader.upload(file.content)
+        // to store
+        user.profile = {
+            public_id: cb.public_id,
+            url: cb.secure_url
+        }
+        // save function
+        await user.save()
+        res.status(200).send({
+            success:true,
+            message:" profile picture updated"
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error in update-picture API",
+            error,
+        })
+
+    }
+
+
+}
+
 
 
 module.exports = {
@@ -219,7 +257,8 @@ module.exports = {
     userProfileController,
     logoutController,
     updateProfileController,
-    updatePasswordController
+    updatePasswordController,
+    updateProfilePic
 }
 
 

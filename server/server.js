@@ -6,12 +6,20 @@ const connectDB = require("./config/db.js")
 const TestRoute = require("./routes/testRoute.js")
 const UserRoute = require("./routes/userRoute.js")
 const cookieParser = require("cookie-parser")
+const cloudinary = require("cloudinary")
 
 //dotenv config
 dotenv.config();
 
 //database connection
 connectDB();
+
+// cloudinary config
+cloudinary.v2.config({
+    cloud_name:process.env.CLOUDINARY_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_SECRET
+})
 
 
 const app = express()

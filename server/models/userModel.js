@@ -18,6 +18,14 @@ const userSchema = new Schema({
         type: String,
         required: [true, "passwors is ewquired"],
         minLength: [6, "password should be greater than 6"]
+    },
+    profile:{
+        public_id: {
+            type:String
+        },
+        url: {
+            type: String
+        }
     }
 
 },
