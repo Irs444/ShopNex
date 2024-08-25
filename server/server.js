@@ -3,9 +3,9 @@ const morgan = require("morgan")
 const cors = require("cors")
 const dotenv = require("dotenv")
 const connectDB = require("./config/db.js")
-const cookieParser = require("cookie-parser")
 const TestRoute = require("./routes/testRoute.js")
 const UserRoute = require("./routes/userRoute.js")
+const cookieParser = require("cookie-parser")
 
 //dotenv config
 dotenv.config();
