@@ -3,10 +3,12 @@ const morgan = require("morgan")
 const cors = require("cors")
 const dotenv = require("dotenv")
 const connectDB = require("./config/db.js")
-const TestRoute = require("./routes/testRoute.js")
-const UserRoute = require("./routes/userRoute.js")
 const cookieParser = require("cookie-parser")
 const cloudinary = require("cloudinary")
+
+const TestRoute = require("./routes/testRoute.js")
+const UserRoute = require("./routes/userRoute.js")
+const ProductRoute = require("./routes/productRoute.js")
 
 //dotenv config
 dotenv.config();
@@ -35,6 +37,7 @@ app.use(cookieParser())    // middleware
 
 app.use("/" , TestRoute)
 app.use("/user" , UserRoute)
+app.use("/product" , ProductRoute)
 
 
 
