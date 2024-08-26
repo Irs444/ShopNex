@@ -1,4 +1,6 @@
 const productModel = require("../models/productModel");
+const getDataUri = require("../utils/features");
+const cloudinary = require("cloudinary")
 
 // get all product controller
 
@@ -59,11 +61,56 @@ const singleProductController = async(req, res) => {
     }
 }
 
+// create product
+
+const createProductController = async(req, res) => {
+    try{
+        const {name, description, price, category, stock} = req.body
+        //validation
+        // if(!name || !description || !price || !category || !stock){
+        //     return res.status(500).send({
+        //         success:false,
+        //         message:"please provide all fields"
+        //     })
+        // }
+        if(!req.file){
+            return res.status(500).send({
+                success: false,
+                message:"please provide product image"
+            })
+        }
+        const file = getDataUri(req.file)
+        const cb = await cloudinary.v2.uploader.upload(file.content)
+        const image = {
+            public_id: cb.public_id,
+            url: cb.secure_url
+        }
+        await productModel.create({
+            name, description, price, category, stock, images:[image]
+        })
+        res.status(200).send({
+            success: true,
+            message:"product created successfully"
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            success:false,
+            message:"error in create product API",
+            error
+        })
+        
+    }
+
+}
+
 
 
 
 
 module.exports = {
     getProductController,
-    singleProductController
+    singleProductController,
+    createProductController
 }
