@@ -105,6 +105,99 @@ const createProductController = async(req, res) => {
 
 }
 
+// update  product controller
+
+const updateProductController = async(req, res) => {
+    try{
+        const product = await productModel.findById(req.params.id)
+        //validation
+        if(!product){
+            return res.status(500).send({
+                success:false,
+                message:"product not found"
+            })
+        }
+        const {name, description, price, stock, category} = req.body
+        // validation
+        if(name) product.name = name
+        if(description) product.description = description
+        if(price) product.price = price
+        if(stock) product.stock = stock
+        if(category) product.category = category
+
+        await product.save()
+        res.status(200).send({
+            success:true,
+            message:"product updated successfully"
+        })
+
+    }catch(error){
+        console.log(error);
+        if(error.name === "CastError"){
+            return res.status(500).send({
+                success:false,
+                message:"invalide id"
+            })
+        }
+        res.status(500).send({
+            success:false,
+            message:"error in update product API",
+            error
+        })
+    }
+
+}
+
+// update product image
+
+const updateProductImage = async(req, res) => {
+    try{
+        const product = await productModel.findById(req.params.id)
+        //validation
+        if(!product){
+            return res.status(500).send({
+                success:false,
+                message:"product not found"
+            })
+        }
+        // check file
+        if(!req.file){
+            return res.status(500).send({
+                success:false,
+                message:"product image not found"
+            })
+        }
+
+        const file = getDataUri(req.file)
+        const cb = await cloudinary.v2.uploader.upload(file.content)
+        const image = {
+            public_id: cb.public_id,
+            url: cb.secure_url
+        }
+        //save
+        product.images.push(image)
+        await product.save();
+        res.status(200).send({
+            success:true,
+            message:"image update successfully"
+        })
+    }catch(error){
+        console.log(error);
+        if(error.name === "CastError"){
+            return res.status(500).send({
+                success:false,
+                message:"invalide id"
+            })
+        }
+        res.status(500).send({
+            success:false,
+            message:"error in update product image API",
+            error
+        })
+    }
+
+}
+
 
 
 
@@ -112,5 +205,7 @@ const createProductController = async(req, res) => {
 module.exports = {
     getProductController,
     singleProductController,
-    createProductController
+    createProductController,
+    updateProductController,
+    updateProductImage 
 }
