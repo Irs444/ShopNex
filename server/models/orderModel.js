@@ -33,7 +33,7 @@ const orderSchema = new Schema({
             image: {
                 type: String,
                 required: [true, "product image is required"]
-            },
+            },  
             product: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "product",
