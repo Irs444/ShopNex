@@ -10,6 +10,7 @@ const TestRoute = require("./routes/testRoute.js")
 const UserRoute = require("./routes/userRoute.js")
 const ProductRoute = require("./routes/productRoute.js")
 const CategoryRoute = require("./routes/categoryRoute.js")
+const OrderRoute = require("./routes/orderRoute.js")
 
 //dotenv config
 dotenv.config();
@@ -40,6 +41,7 @@ app.use("/" , TestRoute)
 app.use("/user" , UserRoute)
 app.use("/product" , ProductRoute)
 app.use("/category" , CategoryRoute)
+app.use("/order", OrderRoute)
 
 
 

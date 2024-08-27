@@ -15,8 +15,12 @@ const productSchema = new Schema({
         required:[true , "product price is required"]
     },
     stock:{
-        type:String,
+        type:Number,
         required:[true , "stock is required"]
+    },
+    quantity:{
+        type:Number,
+        required:[true , "Quantity is required"]
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
