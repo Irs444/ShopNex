@@ -1,6 +1,7 @@
-const { Error } = require("mongoose")
+
 const orderModel = require("../models/orderModel")
 const productModel = require("../models/productModel")
+
 
 // create orders
 const createOrder = async (req, res) => {
@@ -129,10 +130,13 @@ const deleteOrder = async (req, res) => {
 
 }
 
+//payment 
+
 
 module.exports = {
     createOrder,
     getallOrder,
     getsingleOrder,
     deleteOrder
+    
 }
