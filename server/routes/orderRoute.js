@@ -7,6 +7,7 @@ const {
     getsingleOrder, 
     deleteOrder,
     fetchallOrders,
+    updateOrderStatus,
    
 } = require("../controllers/orderController");
 
@@ -21,6 +22,8 @@ router.delete("/delete/:id" , isAuth , isAdmin, deleteOrder)
 // =============Admin Section================
 
 router.get("/admin/getall" , isAuth , isAdmin , fetchallOrders)
+
+router.put("/admin/update/:id" , isAuth , isAdmin, updateOrderStatus)
 
 
 
