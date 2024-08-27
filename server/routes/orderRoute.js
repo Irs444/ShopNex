@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const isAuth = require("../middlewares/authMiddleware");
+const {isAuth, isAdmin} = require("../middlewares/authMiddleware");
 const {
     createOrder,
     getallOrder,
     getsingleOrder, 
     deleteOrder,
+    fetchallOrders,
    
 } = require("../controllers/orderController");
 
@@ -15,9 +16,11 @@ router.get("/getall", isAuth, getallOrder)
 
 router.get("/getbyId/:id", isAuth, getsingleOrder)
 
-router.delete("/delete/:id" , isAuth , deleteOrder)
+router.delete("/delete/:id" , isAuth , isAdmin, deleteOrder)
 
-// router.post("/payment" , isAuth , paymentController)
+// =============Admin Section================
+
+router.get("/admin/getall" , isAuth , isAdmin , fetchallOrders)
 
 
 

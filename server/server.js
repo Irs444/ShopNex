@@ -12,7 +12,7 @@ const UserRoute = require("./routes/userRoute.js")
 const ProductRoute = require("./routes/productRoute.js")
 const CategoryRoute = require("./routes/categoryRoute.js")
 const OrderRoute = require("./routes/orderRoute.js")
-const isAuth = require("./middlewares/authMiddleware.js")
+const {isAuth} = require("./middlewares/authMiddleware.js")
 
 //dotenv config
 dotenv.config();

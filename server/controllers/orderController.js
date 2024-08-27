@@ -130,13 +130,37 @@ const deleteOrder = async (req, res) => {
 
 }
 
-//payment 
+// ====================Admin Section=============
+
+// get all order
+const fetchallOrders = async(req, res) => {
+    try{
+        const orders = await orderModel.find({})
+        res.status(200).send({
+            success:true,
+            message:"fetch all oorders",
+            totalOrders: orders.length,
+            orders
+        })
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            success:false,
+            message:"admmin not found",
+            error
+        })
+        
+    }
+
+}
 
 
 module.exports = {
     createOrder,
     getallOrder,
     getsingleOrder,
-    deleteOrder
+    deleteOrder,
+    fetchallOrders
     
 }

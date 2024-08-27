@@ -11,8 +11,8 @@ const { userController,
 } = require("../controllers/userControllers.js");
 
 
-const isAuth = require("../middlewares/authMiddleware.js");
 const singleUpload = require("../middlewares/multer.js");
+const { isAuth } = require("../middlewares/authMiddleware.js");
 
 
 
