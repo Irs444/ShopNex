@@ -7,7 +7,8 @@ const { userController,
     logoutController,
     updateProfileController,
     updatePasswordController,
-    updateProfilePic
+    updateProfilePic,
+    forgetPassword
 } = require("../controllers/userControllers.js");
 
 
@@ -30,6 +31,8 @@ router.put("/update-profile", isAuth, updateProfileController)
 router.put("/update-password" , isAuth , updatePasswordController)
 
 router.put("/update-picture",isAuth , singleUpload , updateProfilePic)
+
+router.put("/forget-password" ,  forgetPassword)
 
 
 
