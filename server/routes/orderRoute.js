@@ -1,19 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const {isAuth} = require("../middlewares/authMiddleware");
+const {isAuth, isAdmin} = require("../middlewares/authMiddleware");
 const {
     createOrder,
     getallOrder,
     getsingleOrder, 
-    deleteOrder} = require("../controllers/orderController");
+    deleteOrder,
+    fetchallOrders,
+    changeOrderStatus} = require("../controllers/orderController");
 
-router.post("/create", isAuth, createOrder)
+router.post("/create", isAuth, isAdmin, createOrder)
 
 router.get("/getall", isAuth, getallOrder)
 
-router.get("/getbyId/:id", isAuth, getsingleOrder)
+router.get("/getbyId/:id", isAuth,  getsingleOrder)
 
-router.delete("/delete/:id" , isAuth , deleteOrder)
+router.delete("/delete/:id" , isAuth, isAdmin, deleteOrder)
+
+//=============Admin Section=============
+
+router.get("/admin/getall" , isAuth , isAdmin , fetchallOrders)
+
+router.put("/admin/update/:id" , isAuth, isAdmin, changeOrderStatus)
 
 
 

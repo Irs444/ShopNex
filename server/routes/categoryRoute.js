@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {isAuth} = require("../middlewares/authMiddleware");
+const {isAuth, isAdmin} = require("../middlewares/authMiddleware");
 const {
     createCategory,
     getallCategory,
@@ -10,13 +10,13 @@ const {
 
 
 
-router.post("/create", isAuth, createCategory)
+router.post("/create", isAuth, isAdmin, createCategory)
 
 router.get("/getall", isAuth, getallCategory)
 
-router.delete("/delete/:id" , isAuth , deleteCategory)
+router.delete("/delete/:id" , isAuth , isAdmin,  deleteCategory)
 
-router.put("/update/:id" , isAuth, updateCategory)
+router.put("/update/:id" , isAuth, isAdmin, updateCategory)
 
 
 

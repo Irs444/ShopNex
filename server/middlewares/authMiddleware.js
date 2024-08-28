@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
+// user auth
 const isAuth = async (req, res, next) => {
     const  {token}  = req.cookies;
     // console.log("Extracted Token:", token);
@@ -27,4 +28,16 @@ const isAuth = async (req, res, next) => {
 
 };
 
-module.exports ={ isAuth}
+// admin auth
+const isAdmin = async(req, res, next) => {
+    if(req.user.role !== "admin"){
+       return res.status(500).send({
+            success:false,
+            message:"Admin Only"
+        })
+    }
+    next();
+
+}
+
+module.exports ={ isAuth , isAdmin}
