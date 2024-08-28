@@ -6,7 +6,15 @@ const cloudinary = require("cloudinary")
 
 const getProductController = async (req, res) => {
     try {
-        const products = await productModel.find({})
+        const {keyword , category} = req.query
+        const products = await productModel.find({
+            name:{
+                $regex: keyword ? keyword : "",
+                $options: "i",
+            },
+            // category: category? category : null,
+        })
+        .populate("category")
         res.status(200).send({
             success: true,
             message: "all product fetch successfully",
