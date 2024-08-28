@@ -30,6 +30,10 @@ const userSchema = new Schema({
     role:{
         type:String,
         default:"user"
+    },
+    answer:{
+        type:String,
+        required:[true , "answer is  required"]
     }
 
 },
