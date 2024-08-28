@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const isAuth = require("../middlewares/authMiddleware");
+const {isAuth} = require("../middlewares/authMiddleware");
 const {
     createCategory,
     getallCategory,
