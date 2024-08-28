@@ -7,13 +7,12 @@ const { userController,
     logoutController,
     updateProfileController,
     updatePasswordController,
-    updateProfilePic,
-    forgetPassword
+    updateProfilePic
 } = require("../controllers/userControllers.js");
 
 
+const isAuth = require("../middlewares/authMiddleware.js");
 const singleUpload = require("../middlewares/multer.js");
-const { isAuth } = require("../middlewares/authMiddleware.js");
 
 
 
@@ -31,8 +30,6 @@ router.put("/update-profile", isAuth, updateProfileController)
 router.put("/update-password" , isAuth , updatePasswordController)
 
 router.put("/update-picture",isAuth , singleUpload , updateProfilePic)
-
-router.post("/forget-password", forgetPassword)
 
 
 

@@ -4,9 +4,9 @@ const cloudinary = require("cloudinary")
 
 const userController = async (req, res) => {
     try {
-        const { name, email, password, answer } = req.body;
+        const { name, email, password } = req.body;
         //validation
-        if (!name || !email || !password || !answer) {
+        if (!name || !email || !password) {
             return res.status(500).secd({
                 message: "please provide all fields",
                 success: false
@@ -22,7 +22,7 @@ const userController = async (req, res) => {
             })
         }
         const user = await userModel.create({
-            name, email, password, answer
+            name, email, password
         });
         res.status(200).send({
             message: "register successfully , please login",
@@ -232,8 +232,8 @@ const updateProfilePic = async (req, res) => {
         // save function
         await user.save()
         res.status(200).send({
-            success: true,
-            message: " profile picture updated"
+            success:true,
+            message:" profile picture updated"
         })
 
     } catch (error) {
@@ -249,45 +249,6 @@ const updateProfilePic = async (req, res) => {
 
 }
 
-// forget password
-const forgetPassword = async (req, res) => {
-    try {
-        //user get email || password || answer
-        const { email, newPassword, answer } = req.body
-        // validation
-        if (!email || !newPassword || !answer) {
-            return res.status(500).send({
-                success: false,
-                message: "All fields are required"
-            })
-        }
-        // find user
-        const user = await userModel.findOne({ email, answer })
-        if (!user) {
-            return res.status(404).send({
-                success: false,
-                message: "invalid user and answer"
-            })
-        }
-        user.password = newPassword
-        await user.save();
-        res.status(200).send({
-            success: true,
-            message: "your password is reset please Login!!"
-        })
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: true,
-            message: "error in forget password API",
-            error
-        })
-
-    }
-
-}
-
 
 
 module.exports = {
@@ -297,8 +258,7 @@ module.exports = {
     logoutController,
     updateProfileController,
     updatePasswordController,
-    updateProfilePic,
-    forgetPassword
+    updateProfilePic
 }
 
 

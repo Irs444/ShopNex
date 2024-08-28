@@ -1,8 +1,6 @@
-
 const { Error } = require("mongoose")
 const orderModel = require("../models/orderModel")
 const productModel = require("../models/productModel")
-
 
 // create orders
 const createOrder = async (req, res) => {
@@ -131,77 +129,10 @@ const deleteOrder = async (req, res) => {
 
 }
 
-// ====================Admin Section=============
-
-// get all order
-const fetchallOrders = async(req, res) => {
-    try{
-        const orders = await orderModel.find({})
-        res.status(200).send({
-            success:true,
-            message:"fetch all oorders",
-            totalOrders: orders.length,
-            orders
-        })
-
-    }catch(error){
-        console.log(error);
-        res.status(500).send({
-            success:false,
-            message:"admmin not found",
-            error
-        })
-        
-    }
-
-}
-
-//update orderStatus
-const updateOrderStatus = async(req, res) => {
-    try{
-        const order = await orderModel.findById(req.params.id)
-        //validation
-        if(!order){
-            return res.status(404).send({
-                success:false,
-                message:"order not found"
-            })
-        }
-        if(order.orderStatus === "processing") order.orderStatus = "shipped"
-        else if(order.orderStatus === "shipped"){
-            order.orderStatus = "delivered"
-            order.delivereAt= Date.now()
-        }else{
-           return res.status(500).send({
-                success:true,
-                message:"order already delivered"
-            })
-        }
-        await order.save();
-        res.status(200).send({
-            success:true,
-            message:"order status updated"
-        })
-
-    }catch(error){
-        console.log(error);
-        res.status(500).send({
-            success:false,
-            message:"error in update order status",
-            error
-        })
-        
-    }
-
-}
-
 
 module.exports = {
     createOrder,
     getallOrder,
     getsingleOrder,
-    deleteOrder,
-    fetchallOrders,
-    updateOrderStatus
-    
+    deleteOrder
 }

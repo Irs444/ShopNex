@@ -26,14 +26,6 @@ const userSchema = new Schema({
         url: {
             type: String
         }
-    },
-    role:{
-        type:String,
-        default:"user"
-    },
-    answer:{
-        type:String,
-        required:[true , "answer is  required"]
     }
 
 },
