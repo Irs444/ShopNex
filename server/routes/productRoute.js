@@ -9,7 +9,8 @@ const {
     updateProductController,
     updateProductImage,
     deleteProductImage,
-    deleteProductController
+    deleteProductController,
+    productReview
 } = require("../controllers/productController");                      
 
 
@@ -26,6 +27,8 @@ router.put("/image/:id", isAuth , isAdmin, singleUpload,  updateProductImage)
 router.delete("/delete-image/:id" , isAuth, isAdmin, deleteProductImage)
 
 router.delete("/deletebyId/:id" , isAuth, isAdmin, deleteProductController)
+
+router.put("/:id/review" , isAuth , productReview)
 
 
 

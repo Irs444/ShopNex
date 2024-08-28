@@ -10,6 +10,7 @@ const getProductController = async (req, res) => {
         res.status(200).send({
             success: true,
             message: "all product fetch successfully",
+            totalProduct:products.length,
             products
         })
 
@@ -296,6 +297,57 @@ const deleteProductController = async (req, res) => {
     }
 }
 
+// create product review and comment
+
+const productReview = async(req, res) => {
+    try{
+        const {comment , rating} = req.body
+        //find product
+        const product = await productModel.findById(req.params.id)
+        // check pprevious review
+        const reviewExist = product.review.find((r) => r.user.toString() === req.user._id.toString())
+        if(reviewExist){
+            return res.status(400).send({
+                success:false,
+                message: "product already reviewed"
+            })
+        }
+        // review object
+        const reviews = {
+            name: req.user.name,
+            rating:Number(rating),
+            comment,
+            user: req.user._id
+        }
+        // passing review object
+        product.review.push(reviews)
+        product.numReviews = product.review.length
+        product.rating = product.review.reduce((acc , item) => item.rating + acc , 0) / product.review.length
+        //save
+        await product.save();
+        res.status(200).send({
+            success:true,
+            message: "review added!!"
+        })
+
+    }catch (error) {
+        console.log(error);
+        if (error.name === "CastError") {
+            return res.status(500).send({
+                success: false,
+                message: "invalide id"
+            })
+        }
+        res.status(500).send({
+            success: false,
+            message: "error in review API",
+            error
+        })
+
+    }
+
+}
+
 
 
 
@@ -307,5 +359,6 @@ module.exports = {
     updateProductController,
     updateProductImage,
     deleteProductImage,
-    deleteProductController
+    deleteProductController,
+    productReview
 }

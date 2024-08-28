@@ -1,6 +1,28 @@
 const mongoose = require("mongoose")
 const {Schema} = mongoose
 
+// review model
+const reviewSchema = new Schema({
+    comment:{
+        type:String,
+    },
+    name:{
+        type:String,
+        required:[true, "name is required"]
+    },
+    rating:{
+        type:Number,
+        default:0
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"user",
+        required:[true , "user required"]
+    },
+},{timestamps:true})
+
+
+// product model
 const productSchema = new Schema({
     name:{
         type: String,
@@ -31,7 +53,16 @@ const productSchema = new Schema({
             public_id:String,
             url:String
         }
-    ]
+    ],
+    review:[reviewSchema],
+    rating:{
+        type:Number,
+        default:0
+    },
+    numReviews:{
+        type:Number,
+        default:0
+    }
 
 }, {timestamps:true})
 
