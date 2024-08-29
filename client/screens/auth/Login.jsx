@@ -1,6 +1,11 @@
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Button,  StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { TextInput } from 'react-native-paper'
+
+// redux hook
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../redux/features/auth/userAction'
+
 
 const Login = ({ navigation }) => {
 
@@ -8,14 +13,31 @@ const Login = ({ navigation }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    // hook
+    const dispatch = useDispatch()
+    // global state
+    const {loading, error, message} = useSelector(state => state.user)
+
     const handleLogin = () => {
         if(!email || !password){
             alert("Please fill all the fields")
-        }else{
-            alert("Login Success")
-            navigation.navigate("home")
         }
+        dispatch(login(email, password))
+        navigation.navigate("home")
     }
+
+    useEffect(() => {
+        if(message){
+            alert(message)
+            dispatch({type:"clearMessage"})
+             
+        }
+        if(error){
+            alert(error)
+            dispatch({type:"clearError"})
+            
+        }   
+    },[error, message, dispatch])
 
     return (
 
