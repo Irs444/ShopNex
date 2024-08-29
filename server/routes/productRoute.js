@@ -10,11 +10,14 @@ const {
     updateProductImage,
     deleteProductImage,
     deleteProductController,
-    productReview
+    productReview,
+    getTopProduct
 } = require("../controllers/productController");                      
 
 
 router.get("/getall", getProductController)
+
+router.get("/top" , getTopProduct)
 
 router.get("/getbyId/:id", singleProductController) 
 
