@@ -14,31 +14,34 @@ import Notification from './screens/Account/Notification';
 import Profile from './screens/Account/Profile';
 import MyOrders from './screens/Account/MyOrders';
 import Dashboard from './screens/Admin/Dashboard';
+import { Provider } from 'react-redux'
+import store from './redux/store';
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-
-  <NavigationContainer>
-    <Stack.Navigator initialRouteName='login'>
-      <Stack.Screen name="home" component={Home} options={{
-        headerShown: false
-      }}/>
-      <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
-      <Stack.Screen name='signup' component={Register} options={{headerShown:false}}/>
-      <Stack.Screen name='productdetail' component={ProductDetail}/>
-      <Stack.Screen name='cart' component={Cart}/>
-      <Stack.Screen name='account' component={Account}/>
-      <Stack.Screen name='notification' component={Notification}/>
-      <Stack.Screen name='profile' component={Profile}/>
-      <Stack.Screen name='order' component={MyOrders}/>
-      <Stack.Screen name='checkout' component={Checkout}/>
-      <Stack.Screen name='payment' component={Payment}/>
-      <Stack.Screen name='adminpanel' component={Dashboard}/>
-    </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='login'>
+          <Stack.Screen name="home" component={Home} options={{
+            headerShown: false
+          }} />
+          <Stack.Screen name='login' component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name='signup' component={Register} options={{ headerShown: false }} />
+          <Stack.Screen name='productdetail' component={ProductDetail} />
+          <Stack.Screen name='cart' component={Cart} />
+          <Stack.Screen name='account' component={Account} />
+          <Stack.Screen name='notification' component={Notification} />
+          <Stack.Screen name='profile' component={Profile} />
+          <Stack.Screen name='order' component={MyOrders} />
+          <Stack.Screen name='checkout' component={Checkout} />
+          <Stack.Screen name='payment' component={Payment} />
+          <Stack.Screen name='adminpanel' component={Dashboard} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
