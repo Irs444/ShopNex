@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { rateLimit } = require('express-rate-limit') 
 
 const { userController,
     loginController,
@@ -15,12 +16,19 @@ const { userController,
 const {isAuth} = require("../middlewares/authMiddleware.js");
 const singleUpload = require("../middlewares/multer.js");
 
+// rate limiter
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	// store: ... , // Redis, Memcached, etc. See below.
+})
 
 
+router.post("/register",limiter, userController)
 
-router.post("/register", userController)
-
-router.post("/login", loginController)
+router.post("/login", limiter, loginController)
 
 router.get("/profile", isAuth, userProfileController)
 

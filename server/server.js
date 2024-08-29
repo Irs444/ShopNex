@@ -5,6 +5,8 @@ const dotenv = require("dotenv")
 const connectDB = require("./config/db.js")
 const cookieParser = require("cookie-parser")
 const cloudinary = require("cloudinary")
+const helmet = require("helmet")
+const mongoSanitize = require('express-mongo-sanitize');
 
 const TestRoute = require("./routes/testRoute.js")
 const UserRoute = require("./routes/userRoute.js")
@@ -34,6 +36,8 @@ const app = express()
 const port = process.env.PORT
 
 //middlewares
+app.use(helmet())
+app.use(mongoSanitize());
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors())
