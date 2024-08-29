@@ -45,8 +45,8 @@ const Banner = () => {
                 pagination={PaginationLight}
                 renderItem={renderItem}
                 data={bannerData}
-                loop
-                autoplay
+                // loop
+                // autoplay
             />
         </View>
     );
