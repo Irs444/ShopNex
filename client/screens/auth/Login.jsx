@@ -1,10 +1,11 @@
-import { Button,  StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { TextInput } from 'react-native-paper'
 
 // redux hook
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/features/auth/userAction'
+import { useCustomHook } from '../../hooks/customHook'
 
 
 const Login = ({ navigation }) => {
@@ -16,34 +17,23 @@ const Login = ({ navigation }) => {
     // hook
     const dispatch = useDispatch()
     // global state
-    const {loading, error, message} = useSelector(state => state.user)
+    const loading = useCustomHook(navigation, "home")
 
     const handleLogin = () => {
-        if(!email || !password){
+        if (!email || !password) {
             alert("Please fill all the fields")
         }
         dispatch(login(email, password))
-        navigation.navigate("home")
+
     }
 
-    useEffect(() => {
-        if(message){
-            alert(message)
-            dispatch({type:"clearMessage"})
-             
-        }
-        if(error){
-            alert(error)
-            dispatch({type:"clearError"})
-            
-        }   
-    },[error, message, dispatch])
 
     return (
 
         <View style={styles.main}>
             <View style={styles.container}>
                 <Text style={styles.heading}>Login</Text>
+                {/* {loading && <Text>Loading...</Text>} */}
 
                 <Text style={styles.label}>Email</Text>
                 <TextInput style={styles.input} label='Email' mode='outlined'
@@ -54,14 +44,14 @@ const Login = ({ navigation }) => {
                 <Text style={styles.label}>Password</Text>
                 <TextInput label='Password' mode='outlined' secureTextEntry={hide} onChangeText={(text) => setPassword(text)}
                     right={<TextInput.Icon icon={"eye"}
-                    onPress={() => setHide(!hide)} />}
+                        onPress={() => setHide(!hide)} />}
                     style={styles.label}
                     value={password}
-                    
+
                 />
 
                 <View style={styles.btn}>
-                    <Button title='Sign in' color={"#597445"}  onPress={() => handleLogin()} />
+                    <Button title='Sign in' color={"#597445"} onPress={() => handleLogin()} />
                 </View>
                 <Text style={{ marginTop: 25, fontSize: 15, textAlign: "center" }}>Create an account? <Text onPress={() => navigation.navigate("signup")} style={{ color: "#597445", fontWeight: "bold" }}>Sign up</Text> </Text>
             </View>

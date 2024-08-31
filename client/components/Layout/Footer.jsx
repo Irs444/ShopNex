@@ -2,12 +2,17 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { useCustomHook } from '../../hooks/customHook';
+import { logout } from '../../redux/features/auth/userAction';
 
 
 const Footer = () => {
 
   const route = useRoute()
   const navigation = useNavigation()
+  const dispatch = useDispatch();
+  const loading = useCustomHook(navigation, path ="login")
 
   return (
     <View style={styles.container}>
@@ -32,7 +37,7 @@ const Footer = () => {
         <Text style={[styles.input,  route.name === "account" && styles.active ]}>Account</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.menu}  onPress={() => {alert("Logout successfully") , navigation.navigate("login")}}>
+      <TouchableOpacity style={styles.menu}  onPress={() => {dispatch(logout())}}>
         <AntDesign name="logout" size={27} color="#524C42" />
         <Text style={styles.input}>Logout</Text>
       </TouchableOpacity>
